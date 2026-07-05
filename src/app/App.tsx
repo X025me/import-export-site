@@ -58,6 +58,17 @@ interface Product {
   brand?: string;
 }
 
+interface TeamMediaItem {
+  id: string;
+  title: string;
+  category: string;
+  duration?: string;
+  thumbnail: string;
+  description: string;
+  mediaType: "video" | "image";
+  mediaUrl: string;
+}
+
 interface OrderItem {
   product: Product;
   qty: number;
@@ -899,141 +910,136 @@ function CoreServicesSection() {
   );
 }
 
-// ── Videos Section ────────────────────────────────────────────────────────────
+// ── Team Media Section ───────────────────────────────────────────────────────
 
-const VIDEOS = [
+const TEAM_MEDIA_FALLBACK: TeamMediaItem[] = [
   {
-    id: "v1",
-    title: "XCMG 500T Truck Crane — Factory Inspection",
-    category: "Lifting Machinery",
+    id: "team-1",
+    title: "Factory inspection visit",
+    category: "Team",
     duration: "4:32",
-    thumbnail:
-      "https://images.unsplash.com/photo-1504307651254-35680f356dfa?w=600&h=380&fit=crop&auto=format",
-    description:
-      "Full pre-shipment inspection of a 500-ton XCMG truck crane before export. Our QA team covers boom, hydraulics, and load test.",
+    thumbnail: "/media/team/factory-inspection.svg",
+    description: "Our technical team inspects machinery and documentation before every shipment.",
+    mediaType: "video",
+    mediaUrl: "/media/team/factory-inspection.mp4",
   },
   {
-    id: "v2",
-    title: "Jaw Crusher Assembly — Mining Site, Ethiopia",
-    category: "Mining Machinery",
-    duration: "6:14",
-    thumbnail:
-      "https://images.unsplash.com/photo-1581092335397-9583eb92d232?w=600&h=380&fit=crop&auto=format",
-    description:
-      "On-site commissioning of a primary jaw crushing plant supplied by Chera International for a quarrying project.",
-  },
-  {
-    id: "v3",
-    title: "Concrete Batching Plant — Installation Timelapse",
-    category: "Concrete Equipment",
+    id: "team-2",
+    title: "On-site commissioning in East Africa",
+    category: "Project Team",
     duration: "3:18",
-    thumbnail:
-      "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&h=380&fit=crop&auto=format",
-    description:
-      "60m³/hr stationary batching plant assembled and commissioned within 12 days of arrival on site.",
-  },
-  {
-    id: "v4",
-    title: "Crawler Crane — Load Test at 1,200T",
-    category: "Lifting Machinery",
-    duration: "8:05",
-    thumbnail:
-      "https://images.unsplash.com/photo-1590496793929-36417d3117de?w=600&h=380&fit=crop&auto=format",
-    description:
-      "Factory acceptance test of a 1,200-tonne crawler crane. Lifting capacity verified before shipment.",
-  },
-  {
-    id: "v5",
-    title: "Dump Truck Fleet Delivery — 20 Units",
-    category: "Heavy Transport",
-    duration: "2:47",
-    thumbnail:
-      "https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?w=600&h=380&fit=crop&auto=format",
-    description:
-      "Arrival and handover of a 20-unit HOWO dump truck fleet to a mining operator in East Africa.",
-  },
-  {
-    id: "v6",
-    title: "Drilling Rig Commissioning — Foundation Works",
-    category: "Drilling",
-    duration: "5:50",
-    thumbnail:
-      "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=380&fit=crop&auto=format",
-    description:
-      "SANY SR360 rotary drilling rig first deployment on a piling project. Operator training session included.",
+    thumbnail: "/media/team/commissioning.svg",
+    description: "Engineers and project supervisors coordinate installation and commissioning on site.",
+    mediaType: "image",
+    mediaUrl: "/media/team/commissioning.svg",
   },
 ];
 
 function VideosSection() {
   const [playing, setPlaying] = useState<string | null>(null);
-  const activeVideo = VIDEOS.find((v) => v.id === playing);
+  const [mediaItems, setMediaItems] = useState<TeamMediaItem[]>(TEAM_MEDIA_FALLBACK);
+  const [loadingMedia, setLoadingMedia] = useState(true);
+  const activeMedia = mediaItems.find((item) => item.id === playing) ?? null;
+
+  useEffect(() => {
+    let isMounted = true;
+    const apiBase = import.meta.env.DEV ? "http://localhost:3000" : "";
+
+    async function loadTeamMedia() {
+      try {
+        setLoadingMedia(true);
+        const response = await fetch(`${apiBase}/api/team-media`);
+        if (!response.ok) throw new Error("Unable to load team media");
+        const data = await response.json();
+        if (isMounted && Array.isArray(data)) {
+          setMediaItems(data);
+        }
+      } catch (error) {
+        console.error("Team media load failed, using fallback data", error);
+      } finally {
+        if (isMounted) {
+          setLoadingMedia(false);
+        }
+      }
+    }
+
+    loadTeamMedia();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <section className="bg-card border-t border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-28">
         <div className="flex items-center gap-3 mb-4">
           <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-accent">
-            04 — Videos
+            04 — Team Media
           </span>
         </div>
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
           <h2 className="font-display text-4xl sm:text-5xl text-foreground leading-tight">
-            See our equipment
+            Meet the team
             <br />
-            <span className="italic">in the field.</span>
+            <span className="italic">behind the projects.</span>
           </h2>
           <p className="text-sm text-muted-foreground max-w-xs">
-            Factory inspections, on-site commissioning, and
-            fleet deliveries — captured from our projects.
+            Field visits, commissioning work, and project teams captured in media that can be switched between video and image formats.
           </p>
         </div>
 
-        {/* Video grid */}
+        {loadingMedia && (
+          <p className="text-sm text-muted-foreground mb-4">Loading team media…</p>
+        )}
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
-          {VIDEOS.map((video) => (
+          {mediaItems.map((item) => (
             <button
-              key={video.id}
-              onClick={() => setPlaying(video.id)}
+              key={item.id}
+              onClick={() => setPlaying(item.id)}
               className="group relative text-left bg-background overflow-hidden focus:outline-none"
             >
-              {/* Thumbnail */}
               <div className="relative overflow-hidden h-44 bg-secondary">
                 <img
-                  src={video.thumbnail}
-                  alt={video.title}
+                  src={item.thumbnail}
+                  alt={item.title}
                   className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-background/40 group-hover:bg-background/20 transition-colors" />
-                {/* Play button */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="w-12 h-12 bg-accent/90 backdrop-blur-sm flex items-center justify-center group-hover:bg-accent group-hover:scale-110 transition-all duration-200">
-                    <Play className="w-5 h-5 text-accent-foreground fill-accent-foreground ml-0.5" />
+                    {item.mediaType === "video" ? (
+                      <Play className="w-5 h-5 text-accent-foreground fill-accent-foreground ml-0.5" />
+                    ) : (
+                      <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-accent-foreground">
+                        Photo
+                      </span>
+                    )}
                   </div>
                 </div>
-                {/* Duration badge */}
-                <div className="absolute bottom-2.5 right-2.5 bg-background/80 backdrop-blur-sm px-1.5 py-0.5 text-[10px] text-foreground">
-                  {video.duration}
-                </div>
-                {/* Category */}
+                {item.duration && (
+                  <div className="absolute bottom-2.5 right-2.5 bg-background/80 backdrop-blur-sm px-1.5 py-0.5 text-[10px] text-foreground">
+                    {item.duration}
+                  </div>
+                )}
                 <div className="absolute top-2.5 left-2.5 bg-background/80 backdrop-blur-sm border border-border px-1.5 py-0.5 text-[9px] text-muted-foreground uppercase tracking-wider">
-                  {video.category}
+                  {item.category}
                 </div>
               </div>
-              {/* Info */}
               <div className="p-4">
                 <h3 className="text-sm font-medium text-foreground leading-snug group-hover:text-accent transition-colors line-clamp-2">
-                  {video.title}
+                  {item.title}
                 </h3>
                 <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed line-clamp-2">
-                  {video.description}
+                  {item.description}
                 </p>
               </div>
             </button>
           ))}
         </div>
 
-        {/* Video modal */}
-        {playing && activeVideo && (
+        {playing && activeMedia && (
           <div
             className="fixed inset-0 z-50 bg-background/90 backdrop-blur-sm flex items-center justify-center p-4"
             onClick={() => setPlaying(null)}
@@ -1045,11 +1051,11 @@ function VideosSection() {
               <div className="flex items-start justify-between px-5 py-4 border-b border-border">
                 <div>
                   <div className="text-[10px] text-accent uppercase tracking-wider">
-                    {activeVideo.category} ·{" "}
-                    {activeVideo.duration}
+                    {activeMedia.category}
+                    {activeMedia.duration ? ` · ${activeMedia.duration}` : ""}
                   </div>
                   <h3 className="font-display text-lg text-foreground mt-0.5">
-                    {activeVideo.title}
+                    {activeMedia.title}
                   </h3>
                 </div>
                 <button
@@ -1059,26 +1065,27 @@ function VideosSection() {
                   <X className="w-4 h-4" />
                 </button>
               </div>
-              {/* Video placeholder — replace src with real video embed */}
-              <div className="relative bg-secondary aspect-video flex items-center justify-center">
-                <img
-                  src={activeVideo.thumbnail}
-                  alt={activeVideo.title}
-                  className="w-full h-full object-cover opacity-40"
-                />
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-                  <Play className="w-16 h-16 text-accent/60" />
-                  <p className="text-sm text-muted-foreground">
-                    Video coming soon
-                  </p>
-                  <p className="text-xs text-muted-foreground/60">
-                    Replace with YouTube or MP4 embed
-                  </p>
-                </div>
+              <div className="relative bg-secondary aspect-video">
+                {activeMedia.mediaType === "video" ? (
+                  <video
+                    controls
+                    autoPlay
+                    playsInline
+                    poster={activeMedia.thumbnail}
+                    src={activeMedia.mediaUrl}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <img
+                    src={activeMedia.mediaUrl}
+                    alt={activeMedia.title}
+                    className="w-full h-full object-cover"
+                  />
+                )}
               </div>
               <div className="px-5 py-4">
                 <p className="text-sm text-muted-foreground">
-                  {activeVideo.description}
+                  {activeMedia.description}
                 </p>
               </div>
             </div>

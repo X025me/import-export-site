@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#0f172a" />
+  <rect x="80" y="120" width="1120" height="480" rx="24" fill="#111827" stroke="#38bdf8" stroke-width="8" />
+  <circle cx="420" cy="360" r="120" fill="#38bdf8" opacity="0.35" />
+  <rect x="650" y="250" width="260" height="180" rx="16" fill="#f8fafc" />
+  <path d="M720 360l88-52v104z" fill="#0f172a" />
+  <text x="120" y="620" font-family="Arial, sans-serif" font-size="48" fill="#f8fafc">Team Media Preview</text>
+</svg>

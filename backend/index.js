@@ -12,6 +12,7 @@ const CATEGORIES = [
   { id: "mining", label: "Mining Machinery" },
   { id: "transport", label: "Heavy Transport" },
   { id: "drilling", label: "Drilling" },
+  { id: "ev", label: "Electric Vehicles" },
 ];
 
 const PRODUCTS = [
@@ -156,10 +157,35 @@ const PRODUCTS = [
     brand: "Any Brand",
   },
 ];
+
+const TEAM_MEDIA = [
+  {
+    id: "team-1",
+    title: "Factory inspection visit",
+    category: "Team",
+    duration: "4:32",
+    thumbnail: "/media/team/play.webp",
+    description: "Our technical team inspects machinery and documentation before every shipment.",
+    mediaType: "video",
+    mediaUrl: "/media/team/visit.mp4",
+  },
+  {
+    id: "team-2",
+    title: "On-site commissioning in East Africa",
+    category: "Project Team",
+    duration: "3:18",
+    thumbnail: "/media/team/main.JPG",
+    description: "Engineers and project supervisors coordinate installation and commissioning on site.",
+    mediaType: "image",
+    mediaUrl: "/media/team/main.JPG",
+  },
+];
+
 // Serve static files from the dist directory in the main build
 console.log('Serving static files from:', path.join(__dirname, '..', 'dist'));
 
 app.use(express.static(path.join(__dirname,'..', 'dist')));
+app.use('/media', express.static(path.join(__dirname, 'public', 'media')));
 // serve build in dist folder at / path
 //its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.
 app.get('/', (req, res) => {
@@ -179,6 +205,12 @@ app.get('/api/categories', (req, res) => {
 app.get('/api/products', (req, res) => {
   res.json(PRODUCTS);
 });
+
+// API endpoint to get team media items
+app.get('/api/team-media', (req, res) => {
+  res.json(TEAM_MEDIA);
+});
+
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).send('OK');
