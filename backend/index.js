@@ -163,7 +163,6 @@ app.use(express.static(path.join(__dirname,'..', 'dist')));
 // serve build in dist folder at / path
 //its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.
 app.get('/', (req, res) => {
-    
   res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));   
 
 });
