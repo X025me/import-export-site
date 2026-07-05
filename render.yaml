@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: tinsae-app
+    env: node
+    rootDir: .
+    buildCommand: |
+      npm install
+      npm run build
+      cd backend && npm install
+    startCommand: |
+      cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000

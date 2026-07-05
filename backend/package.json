@@ -1,0 +1,15 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "uses mongodb",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "test"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "author": "exodus",
+  "license": "ISC"
+}
