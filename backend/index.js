@@ -13,6 +13,7 @@ const CATEGORIES = [
   { id: "transport", label: "Heavy Transport" },
   { id: "drilling", label: "Drilling" },
   { id: "ev", label: "Electric Vehicles" },
+  { id: "steel", label: "Steel Structure" },
 ];
 
 const PRODUCTS = [
@@ -25,8 +26,7 @@ const PRODUCTS = [
       "Road-mobile hydraulic truck crane with telescopic boom. Available in 25T–500T capacity. XCMG, Liebherr, Tadano and other leading brands sourced to spec.",
     priceNote: "Price on request",
     unit: "unit",
-    image:
-      "https://images.unsplash.com/photo-1504307651254-35680f356dfa?w=600&h=400&fit=crop&auto=format",
+    image: "/media/team/lifting.JPG",
     inStock: true,
     brand: "Any Brand",
   },
@@ -39,8 +39,7 @@ const PRODUCTS = [
       "Heavy-lift crawler crane on tracked undercarriage for soft terrain and large jobsites. Capacities from 50T to 3,200T. Manitowoc, Liebherr, SANY available.",
     priceNote: "Price on request",
     unit: "unit",
-    image:
-      "https://images.unsplash.com/photo-1590496793929-36417d3117de?w=600&h=400&fit=crop&auto=format",
+    image: "/media/team/crowler.JPG",
     inStock: true,
     brand: "Any Brand",
   },
@@ -53,8 +52,7 @@ const PRODUCTS = [
       "Knuckle-boom or straight-boom crane permanently mounted to truck chassis. Ideal for self-loading transport operations. 3T–25T lift capacity.",
     priceNote: "Price on request",
     unit: "unit",
-    image:
-      "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=600&h=400&fit=crop&auto=format",
+    image: "/media/team/truckmouted.webp",
     inStock: true,
     brand: "Any Brand",
   },
@@ -67,8 +65,7 @@ const PRODUCTS = [
       "Stationary or mobile concrete batching plant. Output capacity 25–240 m³/hr. Twin-shaft or drum mixer options. CAMC, SANY, Schwing brands available.",
     priceNote: "Price on request",
     unit: "plant",
-    image:
-      "https://images.unsplash.com/photo-1504307651254-35680f356dfc?w=600&h=400&fit=crop&auto=format",
+    image: "/media/team/ConcreteMixingPlant.JPG",
     inStock: true,
     brand: "Any Brand",
   },
@@ -81,8 +78,7 @@ const PRODUCTS = [
       "Truck-mounted boom pumps and stationary line pumps for high-rise and infrastructure projects. Max pressure 200 bar, output up to 200 m³/hr.",
     priceNote: "Price on request",
     unit: "unit",
-    image:
-      "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&h=400&fit=crop&auto=format",
+    image: "/media/team/concritpumping.avif",
     inStock: true,
     brand: "Any Brand",
   },
@@ -95,8 +91,7 @@ const PRODUCTS = [
       "Hydraulic rotary drilling rigs for piling, foundation, and geotechnical work. SANY SR, XCMG XR series. Max depth 90 m, max diameter 3,000 mm.",
     priceNote: "Price on request",
     unit: "unit",
-    image:
-      "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop&auto=format",
+    image: "/media/team/driling.webp",
     inStock: true,
     brand: "Any Brand",
   },
@@ -109,8 +104,7 @@ const PRODUCTS = [
       "Heavy-duty rigid frame and articulated dump trucks for mining and construction. 25T–100T payload. Caterpillar, Komatsu, XCMG, HOWO available.",
     priceNote: "Price on request",
     unit: "unit",
-    image:
-      "https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?w=600&h=400&fit=crop&auto=format",
+    image: "/media/team/dumptruck.jpg",
     inStock: true,
     brand: "Any Brand",
   },
@@ -123,8 +117,7 @@ const PRODUCTS = [
       "Primary jaw crusher for hard rock and ore crushing. Feed size up to 1,200 mm, output 50–1,500 TPH. Fixed or portable plant configurations.",
     priceNote: "Price on request",
     unit: "unit",
-    image:
-      "https://images.unsplash.com/photo-1581092335397-9583eb92d232?w=600&h=400&fit=crop&auto=format",
+    image: "/media/team/jawcrusher.webp",
     inStock: true,
     brand: "Any Brand",
   },
@@ -137,8 +130,7 @@ const PRODUCTS = [
       "Electromechanical vibrating feeder for uniform material feed into crushers and screens. Capacity 80–1,000 TPH. Available in various trough widths.",
     priceNote: "Price on request",
     unit: "unit",
-    image:
-      "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=600&h=400&fit=crop&auto=format",
+    image: "/media/team/vibrationfeeder.jpg",
     inStock: true,
     brand: "Any Brand",
   },
@@ -151,11 +143,49 @@ const PRODUCTS = [
       "Track-mounted or wheel-mounted crushing and screening plant. Jaw + cone + screen combination. Rapid deployment, 200–600 TPH output.",
     priceNote: "Price on request",
     unit: "plant",
-    image:
-      "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?w=600&h=400&fit=crop&auto=format",
+    image: "/media/team/mobilecrusher.webp",
     inStock: true,
     brand: "Any Brand",
   },
+    {
+    id: "p11",
+      name: "Chinese Electric Vehicle (Export)",
+      sku: "CN-EV-011",
+      category: "ev",
+      description:
+        "Electric vehicle produced in China for export markets. Suitable for fleet sales and international distributors; available in multiple configurations with left- or right-hand drive options, compliant with export regulations and adaptable to local standards.",
+      priceNote: "Price on request",
+      unit: "vehicle",
+      image: "/media/team/BYD1.JPG",
+      inStock: true,
+      brand: "Various Chinese Manufacturers",
+  },
+      {
+    id: "p12",
+      name: "Chinese Electric Vehicle (Compact/City)",
+      sku: "CN-EV-012",
+      category: "ev",
+      description:
+        "Compact electric vehicle designed for urban and export markets. Emphasizes efficiency, low operating cost, and ease of maintenance. Offered by multiple Chinese suppliers targeting international distributors and resellers.",
+      priceNote: "Price on request",
+      unit: "vehicle",
+      image: "/media/team/IMG_1529.JPG",
+      inStock: true,
+      brand: "Various Chinese Manufacturers",
+  },
+  {
+    id: "p13",
+      name: "Steel Structure Components",
+      sku: "STL-SC-013",
+      category: "steel",
+      description:
+        "Prefabricated steel structure components for industrial and commercial construction. Includes beams, columns, trusses, and panels. Customizable to project specifications.",
+      priceNote: "Price on request",
+      unit: "set",
+      image: "/media/team/IMG_1525.JPG",
+      inStock: true,
+      brand: "Various Manufacturers",
+  }
 ];
 
 const TEAM_MEDIA = [
@@ -164,7 +194,7 @@ const TEAM_MEDIA = [
     title: "Factory inspection visit",
     category: "Team",
     duration: "4:32",
-    thumbnail: "/media/team/play.webp",
+    thumbnail: "/media/team/thumbnail1.JPG",
     description: "Our technical team inspects machinery and documentation before every shipment.",
     mediaType: "video",
     mediaUrl: "/media/team/visit.mp4",
@@ -179,17 +209,56 @@ const TEAM_MEDIA = [
     mediaType: "image",
     mediaUrl: "/media/team/main.JPG",
   },
+  {
+    id: "team-2",
+    title: "On-site commissioning in East Africa",
+    category: "Project Team",
+    duration: "3:18",
+    thumbnail: "/media/team/team1.JPG",
+    description: "Engineers and project supervisors coordinate installation and commissioning on site.",
+    mediaType: "image",
+    mediaUrl: "/media/team/team1.JPG",
+  },
+  {
+    id: "team-2",
+    title: "On-site commissioning in East Africa",
+    category: "Project Team",
+    duration: "3:18",
+    thumbnail: "/media/team/team2.JPG",
+    description: "Engineers and project supervisors coordinate installation and commissioning on site.",
+    mediaType: "image",
+    mediaUrl: "/media/team/team2.JPG",
+  },
+  {
+    id: "team-2",
+    title: "On-site commissioning in East Africa",
+    category: "Project Team",
+    duration: "3:18",
+    thumbnail: "/media/team/team3.JPG",
+    description: "Engineers and project supervisors coordinate installation and commissioning on site.",
+    mediaType: "image",
+    mediaUrl: "/media/team/team3.JPG",
+  },
+    {
+    id: "team-2",
+    title: "On-site commissioning in East Africa",
+    category: "Project Team",
+    duration: "3:18",
+    thumbnail: "/media/team/team4.JPG",
+    description: "Engineers and project supervisors coordinate installation and commissioning on site.",
+    mediaType: "image",
+    mediaUrl: "/media/team/team4.JPG",
+  }
 ];
 
 // Serve static files from the dist directory in the main build
-console.log('Serving static files from:', path.join(__dirname, '..', 'dist'));
 
-app.use(express.static(path.join(__dirname,'..', 'dist')));
+app.use(express.static(path.join(__dirname, '..', 'dist')));
 app.use('/media', express.static(path.join(__dirname, 'public', 'media')));
 // serve build in dist folder at / path
 //its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));   
+  res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
 
 });
 // I want to use mongodb to store cateogry and product
@@ -197,7 +266,7 @@ app.get('/', (req, res) => {
 
 // API endpoint to get categories
 app.get('/api/categories', (req, res) => {
- // Fetch categories from MongoDB and send as JSON response
+  // Fetch categories from MongoDB and send as JSON response
   res.json(CATEGORIES);
 });
 

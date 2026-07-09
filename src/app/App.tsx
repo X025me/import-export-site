@@ -5,6 +5,7 @@ import {
   useContext,
   useEffect,
 } from "react";
+import ChengduImage from "@/assets/Chengdu.jpg";
 import * as Dialog from "@radix-ui/react-dialog";
 import {
   ShoppingCart,
@@ -575,7 +576,7 @@ function WhoWeAreSection() {
           <div className="space-y-6">
             <div className="relative overflow-hidden bg-secondary">
               <img
-                src="https://images.unsplash.com/photo-1590496793929-36417d3117de?w=800&h=500&fit=crop&auto=format"
+                src={ChengduImage}
                 alt="Large crawler crane on construction site"
                 className="w-full h-64 sm:h-80 object-cover"
               />
@@ -585,7 +586,7 @@ function WhoWeAreSection() {
                 </div>
                 <div className="text-sm text-foreground mt-0.5 flex items-center gap-1.5">
                   <MapPin className="w-3 h-3 text-accent" />{" "}
-                  China · Ethiopia · East Africa
+                  Chengdu, China  · Ethiopia · East Africa
                 </div>
               </div>
             </div>
@@ -599,7 +600,7 @@ function WhoWeAreSection() {
                 },
                 {
                   icon: Globe,
-                  value: "50+",
+                  value: "5+",
                   label: "Countries Active",
                 },
                 {
@@ -1251,6 +1252,11 @@ function ContactSection() {
             <div className="mt-10 space-y-4">
               {[
                 {
+                  label: "China Office (Sales)",
+                  number: "+86 147 2600 6289 ",
+                  flag: "🇨🇳",
+                },
+                {
                   label: "China Office (Procurement)",
                   number: "+86 147 0808 3872",
                   flag: "🇨🇳",
@@ -1285,7 +1291,7 @@ function ContactSection() {
               ))}
 
               <a
-                href="mailto:info@cheraintl.com"
+                href="mailto:tradingchera@gmail.com"
                 className="group flex items-center gap-4 p-4 bg-background border border-border hover:border-accent/40 transition-colors"
               >
                 <span className="text-2xl">✉️</span>
@@ -1295,7 +1301,7 @@ function ContactSection() {
                   </div>
                   <div className="text-base font-medium text-foreground group-hover:text-accent transition-colors mt-0.5 flex items-center gap-2">
                     <Mail className="w-3.5 h-3.5" />
-                    info@cheraintl.com
+                    tradingchera@gmail.com
                   </div>
                 </div>
               </a>
