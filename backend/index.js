@@ -251,10 +251,10 @@ const TEAM_MEDIA = [
     title: "On-site commissioning in East Africa",
     category: "Project Team",
     duration: "3:18",
-    thumbnail: "/media/team/team4.JPG",
+    thumbnail: "/media/team/team4.jpg",
     description: "Engineers and project supervisors coordinate installation and commissioning on site.",
     mediaType: "image",
-    mediaUrl: "/media/team/team4.JPG",
+    mediaUrl: "/media/team/team4.jpg",
   }
 ];
 
