@@ -605,7 +605,7 @@ function WhoWeAreSection() {
                 },
                 {
                   icon: Award,
-                  value: "15+",
+                  value: "7+",
                   label: "Years Experience",
                 },
                 {
@@ -1195,7 +1195,7 @@ function WhyWorkWithUsSection({
                 <div className="w-8 h-px bg-accent" />
                 <div>
                   <div className="text-sm text-foreground">
-                    Dinsa argew
+                    Tesfaye Dinsa
                   </div>
                   <div className="text-xs text-muted-foreground">
                     Operations Director · Nile Stone Quarrying,
