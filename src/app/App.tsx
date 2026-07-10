@@ -502,7 +502,7 @@ function HeroSection({
                 label: "We source globally",
               },
               { value: "5+", label: "Countries served" },
-              { value: "3,4+", label: "Projects supplied" },
+              { value: "34+", label: "Projects supplied" },
             ].map((s) => (
               <div key={s.label}>
                 <div className="font-display text-2xl text-foreground">
