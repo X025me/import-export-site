@@ -4,6 +4,23 @@ const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  const allowedOrigin = process.env.CORS_ORIGIN || origin || '*';
+
+  res.header('Access-Control-Allow-Origin', allowedOrigin);
+  res.header('Vary', 'Origin');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(204);
+  }
+
+  next();
+});
+
 // here i want to define the data in a json format for categories and products
 const CATEGORIES = [
   { id: "all", label: "All Equipment" },
@@ -117,7 +134,7 @@ const PRODUCTS = [
       "Primary jaw crusher for hard rock and ore crushing. Feed size up to 1,200 mm, output 50–1,500 TPH. Fixed or portable plant configurations.",
     priceNote: "Price on request",
     unit: "unit",
-    image: "/media/team/jawcrusher.webp",
+    image: "/media/team/crusher.JPG",
     inStock: true,
     brand: "Any Brand",
   },
@@ -210,7 +227,7 @@ const TEAM_MEDIA = [
     mediaUrl: "/media/team/main.JPG",
   },
   {
-    id: "team-2",
+    id: "team-3",
     title: "On-site commissioning in East Africa",
     category: "Project Team",
     duration: "3:18",
@@ -220,7 +237,7 @@ const TEAM_MEDIA = [
     mediaUrl: "/media/team/team1.JPG",
   },
   {
-    id: "team-2",
+    id: "team-4",
     title: "On-site commissioning in East Africa",
     category: "Project Team",
     duration: "3:18",
@@ -230,7 +247,7 @@ const TEAM_MEDIA = [
     mediaUrl: "/media/team/team2.JPG",
   },
   {
-    id: "team-2",
+    id: "team-5",
     title: "On-site commissioning in East Africa",
     category: "Project Team",
     duration: "3:18",
@@ -240,7 +257,7 @@ const TEAM_MEDIA = [
     mediaUrl: "/media/team/team3.JPG",
   },
     {
-    id: "team-2",
+    id: "team-6",
     title: "On-site commissioning in East Africa",
     category: "Project Team",
     duration: "3:18",

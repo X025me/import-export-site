@@ -444,7 +444,7 @@ function HeroSection({
     <section className="relative min-h-[92vh] flex items-end pb-16 sm:pb-24 overflow-hidden bg-background">
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1590496793929-36417d3117de?w=800&h=500&fit=crop&auto=format"
+          src="/media/team/hero.JPG"
           alt="Heavy construction crane at a major project site"
           className="w-full h-full object-cover"
         />
@@ -644,9 +644,8 @@ const SIGNATURE_PROGRAMS = [
     description:
       "Our flagship supply program covers the full spectrum of lifting equipment. From compact truck-mounted cranes for urban worksites to 3,000T crawler cranes for mega-projects — we source, inspect, and deliver to your site. All leading brands available.",
     highlight: "25T – 3,200T capacity range",
-    isVideo: true,
-    image:
-      "https://v.made-in-china.com/ucv/sbr/dde1711a7cbfd18e22c25c434b5a8a/4dbcb315e410205535955754696104_h264_def.mp4",
+    isVideo: false,
+    image: "/media/team/liftings.JPG",
   },
   {
     icon: Mountain,
@@ -1196,7 +1195,7 @@ function WhyWorkWithUsSection({
                 <div className="w-8 h-px bg-accent" />
                 <div>
                   <div className="text-sm text-foreground">
-                    Abebe Tesfaye
+                    Dinsa argew
                   </div>
                   <div className="text-xs text-muted-foreground">
                     Operations Director · Nile Stone Quarrying,
@@ -1326,7 +1325,7 @@ function ContactSection() {
                 {
                   label: "Your Name",
                   type: "text",
-                  ph: "Abebe Tadesse",
+                  ph: "Dinsa Argew",
                   key: "name",
                 },
                 {
@@ -1544,7 +1543,7 @@ function HomePage({
 
 // ── Catalog ───────────────────────────────────────────────────────────────────
 
-function ProductCard({ product }: { product: Product }) {
+function ProductCard({ product, onImageClick }: { product: Product; onImageClick?: (product: Product) => void }) {
   const { state, dispatch } = useOrder();
   const inOrder = state.items.some(
     (i) => i.product.id === product.id,
@@ -1552,7 +1551,7 @@ function ProductCard({ product }: { product: Product }) {
 
   return (
     <article className="group flex flex-col bg-card border border-border overflow-hidden hover:border-border/60 transition-colors duration-200">
-      <div className="relative overflow-hidden bg-secondary h-44">
+      <div className="relative overflow-hidden bg-secondary h-44 cursor-pointer" onClick={() => onImageClick?.(product)}>
         <img
           src={product.image}
           alt={product.name}
@@ -1609,7 +1608,7 @@ function ProductCard({ product }: { product: Product }) {
   );
 }
 
-function ProductGrid({ products }: { products: Product[] }) {
+function ProductGrid({ products, onSelectProduct }: { products: Product[]; onSelectProduct: (product: Product) => void }) {
   if (products.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-28 text-center">
@@ -1624,7 +1623,7 @@ function ProductGrid({ products }: { products: Product[] }) {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-px bg-border">
       {products.map((p) => (
         <div key={p.id} className="bg-background">
-          <ProductCard product={p} />
+          <ProductCard product={p} onImageClick={onSelectProduct} />
         </div>
       ))}
     </div>
@@ -1773,6 +1772,140 @@ function OrderDrawer({
               </button>
             </div>
           )}
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
+  );
+}
+
+// ── Product Detail Modal ──────────────────────────────────────────────────────
+
+function ProductDetailModal({
+  product,
+  onClose,
+}: {
+  product: Product | null;
+  onClose: () => void;
+}) {
+  const { dispatch } = useOrder();
+
+  if (!product) return null;
+
+  return (
+    <Dialog.Root
+      open={product !== null}
+      onOpenChange={(v) => !v && onClose()}
+    >
+      <Dialog.Portal>
+        <Dialog.Overlay className="fixed inset-0 z-50 bg-background/60 backdrop-blur-sm" />
+        <Dialog.Content className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+          <div className="bg-card border border-border rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            {/* Close button */}
+            <div className="sticky top-0 flex items-center justify-end p-4 border-b border-border bg-card/95 backdrop-blur-sm">
+              <Dialog.Close asChild>
+                <button className="p-1.5 text-muted-foreground hover:text-foreground transition-colors">
+                  <X className="w-4 h-4" />
+                </button>
+              </Dialog.Close>
+            </div>
+
+            {/* Content */}
+            <div className="p-6 sm:p-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {/* Image */}
+                <div className="flex flex-col gap-4">
+                  <div className="relative overflow-hidden bg-secondary aspect-square">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+
+                {/* Details */}
+                <div className="flex flex-col gap-6">
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground bg-secondary px-2 py-1">
+                        {product.sku}
+                      </span>
+                      {product.brand && (
+                        <span className="text-[10px] font-medium uppercase tracking-widest text-accent bg-secondary px-2 py-1">
+                          {product.brand}
+                        </span>
+                      )}
+                    </div>
+                    <h1 className="font-display text-2xl sm:text-3xl text-foreground leading-tight">
+                      {product.name}
+                    </h1>
+                  </div>
+
+                  <div className="space-y-3 py-4 border-y border-border">
+                    <div>
+                      <div className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground mb-1">
+                        Description
+                      </div>
+                      <p className="text-sm text-foreground leading-relaxed">
+                        {product.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <div className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground mb-1">
+                        Category
+                      </div>
+                      <p className="text-sm text-foreground capitalize">
+                        {product.category}
+                      </p>
+                    </div>
+                    <div>
+                      <div className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground mb-1">
+                        Unit
+                      </div>
+                      <p className="text-sm text-foreground capitalize">
+                        {product.unit}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground mb-1">
+                      Status
+                    </div>
+                    <p className="text-sm">
+                      {product.inStock ? (
+                        <span className="text-green-500">In Stock</span>
+                      ) : (
+                        <span className="text-amber-600">Out of Stock</span>
+                      )}
+                    </p>
+                  </div>
+
+                  <div className="border-t border-border pt-4">
+                    <div className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground mb-2">
+                      Pricing
+                    </div>
+                    <div className="text-lg font-medium text-accent mb-4">
+                      {product.priceNote}
+                    </div>
+                    <button
+                      onClick={() => {
+                        dispatch({ type: "ADD", product });
+                        onClose();
+                      }}
+                      className="w-full flex items-center justify-center gap-2 bg-accent text-accent-foreground text-sm font-medium py-3 hover:bg-accent/85 transition-colors"
+                    >
+                      <Plus className="w-4 h-4" />
+                      Add to Enquiry
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
@@ -2001,6 +2134,7 @@ export default function App() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [categories, setCategories] = useState<Category[]>(CATEGORIES);
   const [products, setProducts] = useState<Product[]>(PRODUCTS);
   const [isLoadingCatalog, setIsLoadingCatalog] = useState(true);
@@ -2129,7 +2263,7 @@ export default function App() {
               ))}
             </div>
 
-            <ProductGrid products={filtered} />
+            <ProductGrid products={filtered} onSelectProduct={setSelectedProduct} />
           </main>
         )}
 
@@ -2144,6 +2278,10 @@ export default function App() {
         <OrderFormModal
           open={formOpen}
           onClose={() => setFormOpen(false)}
+        />
+        <ProductDetailModal
+          product={selectedProduct}
+          onClose={() => setSelectedProduct(null)}
         />
       </div>
 
