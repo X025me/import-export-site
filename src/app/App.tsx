@@ -1185,8 +1185,8 @@ function WhyWorkWithUsSection({
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 items-end">
             <div>
               <div className="font-display text-2xl sm:text-3xl text-foreground leading-relaxed italic">
-                &ldquo;Chera sourced and delivered a complete
-                jaw crushing plant to our quarry in 11 weeks,
+                &ldquo;Chera trading sourced and delivered a complete
+                jaw crushing plant to our quarry in one month. The equipment was,
                 fully commissioned and tested. Their team
                 handled everything from the factory to our
                 gate.&rdquo;
